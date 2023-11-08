@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  mvcmovie:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+    - 12345:80
+    environment:
+      LC_ALL: en_US.UTF-8
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sql1
+    hostname: sql1
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: abc1234!
+    ports:
+    - 1433:1433

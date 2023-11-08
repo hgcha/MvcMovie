@@ -5,7 +5,7 @@ using MvcMovie.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MvcMovieContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Localhost1433") ?? throw new InvalidOperationException("Connection string 'Localhost1433' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("e78f38111a9e") ?? throw new InvalidOperationException("Connection string 'e78f38111a9e' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -15,7 +15,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-
+    services.GetService<MvcMovieContext>().Database.Migrate();
     SeedData.Initialize(services);
 }
 
